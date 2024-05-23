@@ -4,6 +4,8 @@ import com.axway.apim.api.API;
 import com.axway.apim.lib.error.AppException;
 import com.axway.apim.lib.error.ErrorCode;
 import com.axway.apim.lib.utils.Utils;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +36,7 @@ public class WADLSpecification extends APISpecification {
     public void configureBasePath(String backendBasePath, API api) throws AppException {
         try {
             if (backendBasePath != null) {
-                URL url = new URL(backendBasePath); // Parse it to make sure it is valid
+                URL url = Urls.create(backendBasePath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS); // Parse it to make sure it is valid
                 if (url.getPath() != null && !url.getPath().isEmpty() && !backendBasePath.endsWith("/")) { // See issue #178
                     backendBasePath += "/";
                 }
