@@ -29,7 +29,7 @@ public class APIConfig {
         if (api.getOutboundProfiles().isEmpty()) return Collections.emptyMap();
         if (api.getOutboundProfiles().size() == 1) {
             OutboundProfile defaultProfile = api.getOutboundProfiles().get(DEFAULT);
-            if (defaultProfile.getRouteType().equals("proxy")
+            if ("proxy".equals(defaultProfile.getRouteType())
                 && defaultProfile.getAuthenticationProfile().equals(DEFAULT)
                 && defaultProfile.getRequestPolicy() == null
                 && defaultProfile.getResponsePolicy() == null
@@ -124,7 +124,7 @@ public class APIConfig {
 
 
     public String getDescriptionType() {
-        if (api.getDescriptionType().equals("original")) return null;
+        if ("original".equals(api.getDescriptionType())) return null;
         return api.getDescriptionType();
     }
 

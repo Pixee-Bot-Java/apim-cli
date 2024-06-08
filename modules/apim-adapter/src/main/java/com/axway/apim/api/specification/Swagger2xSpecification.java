@@ -52,7 +52,7 @@ public class Swagger2xSpecification extends APISpecification {
             if (basePath != null) {
                 URL url = new URL(host);
                 String port = url.getPort() == -1 ? ":" + url.getDefaultPort() : ":" + url.getPort();
-                if (port.equals(":443") || port.equals(":80")) port = "";
+                if (":443".equals(port) || ":80".equals(port)) port = "";
                 ((ObjectNode) swagger).put(BASE_PATH, basePath);
                 ((ObjectNode) swagger).put("host", url.getHost() + port);
                 ArrayNode newSchemes = this.mapper.createArrayNode();
@@ -95,7 +95,7 @@ public class Swagger2xSpecification extends APISpecification {
                 }
                 URL url = new URL(backendBasePath);
                 String port = url.getPort() == -1 ? ":" + url.getDefaultPort() : ":" + url.getPort();
-                if (port.equals(":443") || port.equals(":80")) port = "";
+                if (":443".equals(port) || ":80".equals(port)) port = "";
                 if (swagger.get("host") == null) {
                     LOG.debug("Adding new host {}{} to Swagger-File based on backendBasePath: {}", url.getHost(), port, backendBasePath);
                     ((ObjectNode) swagger).put("host", url.getHost() + port);

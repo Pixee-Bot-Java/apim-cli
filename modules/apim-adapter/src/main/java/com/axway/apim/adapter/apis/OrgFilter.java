@@ -67,7 +67,7 @@ public class OrgFilter implements CustomPropertiesFilter {
 
 	public void setName(String name) {
 		if(name==null) return;
-		if(name.equals("*")) return;
+		if("*".equals(name)) return;
 		this.name = name;
 		FilterHelper.setFilter(name, filters);
 	}

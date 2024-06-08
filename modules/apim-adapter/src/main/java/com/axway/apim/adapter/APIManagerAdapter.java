@@ -232,10 +232,10 @@ public class APIManagerAdapter {
             }
             User user = getCurrentUser();
             String role = getHigherRole(user);
-            if (role.equals(ADMIN)) {
+            if (ADMIN.equals(role)) {
                 hasAdminAccount = true;
                 // Also register this client as an Admin-Client
-            } else if (role.equals(OADMIN)) {
+            } else if (OADMIN.equals(role)) {
                 usingOrgAdmin = true;
             }
         } catch (IOException | URISyntaxException e) {
@@ -251,9 +251,9 @@ public class APIManagerAdapter {
         if (organizations2Role == null)
             return role;
         List<String> roles = new ArrayList<>();
-        if (role.equals(USER)) {
+        if (USER.equals(role)) {
             for (String multiOrgRole : organizations2Role.values()) {
-                if (multiOrgRole.equals(USER))
+                if (USER.equals(multiOrgRole))
                     continue;
                 roles.add(multiOrgRole);
             }
@@ -479,9 +479,9 @@ public class APIManagerAdapter {
                     JsonNode clientIds = mapper.readTree(response);
                     for (JsonNode clientId : clientIds) {
                         String key;
-                        if (type.equals(CREDENTIAL_TYPE_API_KEY)) {
+                        if (CREDENTIAL_TYPE_API_KEY.equals(type)) {
                             key = clientId.get("id").asText();
-                        } else if (type.equals(CREDENTIAL_TYPE_EXT_CLIENTID) || type.equals(CREDENTIAL_TYPE_OAUTH)) {
+                        } else if (CREDENTIAL_TYPE_EXT_CLIENTID.equals(type) || CREDENTIAL_TYPE_OAUTH.equals(type)) {
                             if (clientId.get("clientId") == null) {
                                 key = "NOT_FOUND";
                             } else {

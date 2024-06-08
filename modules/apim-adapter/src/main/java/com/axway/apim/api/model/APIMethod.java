@@ -137,13 +137,13 @@ public class APIMethod {
                 return false;
             }
             boolean flag = false;
-            if (descriptionType.equals("manual") && StringUtils.equals(descriptionManual, apiMethod.descriptionManual)) {
+            if ("manual".equals(descriptionType) && StringUtils.equals(descriptionManual, apiMethod.descriptionManual)) {
                 flag =  true;
-            } else if (descriptionType.equals("url") && StringUtils.equals(descriptionUrl, apiMethod.descriptionUrl)) {
+            } else if ("url".equals(descriptionType) && StringUtils.equals(descriptionUrl, apiMethod.descriptionUrl)) {
                 flag =  true;
-            } else if (descriptionType.equals("markdown") && StringUtils.equals(descriptionMarkdown, apiMethod.descriptionMarkdown)) {
+            } else if ("markdown".equals(descriptionType) && StringUtils.equals(descriptionMarkdown, apiMethod.descriptionMarkdown)) {
                 flag =  true;
-            }else if (descriptionType.equals("original"))
+            }else if ("original".equals(descriptionType))
                 flag =  true;
             return flag;
         }

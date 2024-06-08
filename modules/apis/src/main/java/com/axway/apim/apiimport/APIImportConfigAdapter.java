@@ -245,7 +245,7 @@ public class APIImportConfigAdapter {
 
     private void initQuota(APIQuota quotaConfig) {
         if (quotaConfig == null) return;
-        if (quotaConfig.getType().equals("APPLICATION")) {
+        if ("APPLICATION".equals(quotaConfig.getType())) {
             quotaConfig.setName("Application Default");
             quotaConfig.setDescription("Maximum message rates per application. Applied to each application unless an Application-Specific quota is configured");
         } else {
@@ -521,7 +521,7 @@ public class APIImportConfigAdapter {
         boolean defaultProfileFound = false;
         while (it.hasNext()) {
             String profileName = it.next();
-            if (profileName.equals(DEFAULT)) {
+            if (DEFAULT.equals(profileName)) {
                 defaultProfileFound = true;
                 continue; // No need to check for the default profile
             }
@@ -608,7 +608,7 @@ public class APIImportConfigAdapter {
         while (it.hasNext()) {
             String profileName = it.next();
             OutboundProfile profile = importApi.getOutboundProfiles().get(profileName);
-            if (profileName.equals(DEFAULT)) {
+            if (DEFAULT.equals(profileName)) {
                 defaultProfileFound = true;
                 // Validate the _default Outbound-Profile has an AuthN-Profile, otherwise we must add (See issue #133)
 

@@ -174,7 +174,7 @@ public abstract class APIResultHandler {
             if (profile.getRequestPolicy() != null && profile.getRequestPolicy().getName() != null) {
                 requestPolicies.add(profile.getRequestPolicy().getName());
             }
-            if (profile.getRouteType().equals("policy") && profile.getRoutePolicy() != null && profile.getRoutePolicy().getName() != null) {
+            if ("policy".equals(profile.getRouteType()) && profile.getRoutePolicy() != null && profile.getRoutePolicy().getName() != null) {
                 routingPolicies.add(profile.getRoutePolicy().getName());
             }
             if (profile.getResponsePolicy() != null && profile.getResponsePolicy().getName() != null) {

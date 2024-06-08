@@ -141,10 +141,10 @@ public class APIStatusManager {
             // Take over the status, as it has been updated now
             apiToUpdate.setState(desiredState);
             // When deprecation or undeprecation is requested, we have to set the actual API accordingly!
-            if (desiredState.equals(APIStatusManager.UNDEPRECATED)) {
+            if (APIStatusManager.UNDEPRECATED.equals(desiredState)) {
                 apiToUpdate.setDeprecated("false");
                 apiToUpdate.setState(API.STATE_PUBLISHED);
-            } else if (desiredState.equals(APIStatusManager.DEPRECATED)) {
+            } else if (APIStatusManager.DEPRECATED.equals(desiredState)) {
                 apiToUpdate.setState(API.STATE_PUBLISHED);
                 apiToUpdate.setDeprecated("true");
             }

@@ -222,7 +222,7 @@ public class CSVAppExporter extends ApplicationExporter {
         if (quotaRestriction == null) return "N/A";
         API restrictedAPI = apiAdapter.getAPIWithId(quotaRestriction.getApiId());
         if (restrictedAPI == null) return "Err";
-        return quotaRestriction.getMethod().equals("*") ? "All Methods" : methodAdapter.getMethodForId(restrictedAPI.getId(), quotaRestriction.getMethod()).getName();
+        return "*".equals(quotaRestriction.getMethod()) ? "All Methods" : methodAdapter.getMethodForId(restrictedAPI.getId(), quotaRestriction.getMethod()).getName();
     }
 
     private String getQuotaConfig(QuotaRestriction quotaRestriction) {

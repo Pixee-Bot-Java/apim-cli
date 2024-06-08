@@ -76,7 +76,7 @@ public class APIManagerCLI {
         if (args == null || args.length < 1) return;
         for (int i = 0; i < args.length; i++) {
             // Skip the first argument when it's choco
-            if (args[i] == null || args[i].equals("choco")) continue;
+            if (args[i] == null || "choco".equals(args[i])) continue;
             if (servicesMappedByGroup.get(args[i]) != null) {
                 this.selectedServiceGroup = servicesMappedByGroup.get(args[i]);
                 if (args.length <= i + 1) break;

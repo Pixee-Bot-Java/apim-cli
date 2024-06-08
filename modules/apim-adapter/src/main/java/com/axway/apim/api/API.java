@@ -258,7 +258,7 @@ public class API implements CustomPropertiesEntity {
      */
     public String getState() {
         if (this.deprecated != null
-            && this.deprecated.equals("true")) return STATE_DEPRECATED;
+            && "true".equals(this.deprecated)) return STATE_DEPRECATED;
         return this.state;
     }
 

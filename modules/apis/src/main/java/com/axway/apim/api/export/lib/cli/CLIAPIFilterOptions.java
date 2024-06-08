@@ -53,7 +53,7 @@ public class CLIAPIFilterOptions extends CLIOptions {
             }
             String start = createdOns[0];
             String end = createdOns[1];
-            if (start.equals("now")) {
+            if ("now".equals(start)) {
                 throw new AppException("You cannot use 'now' as the start date.", ErrorCode.INVALID_PARAMETER);
             }
             Date startDate = null;
@@ -83,7 +83,7 @@ public class CLIAPIFilterOptions extends CLIOptions {
     }
 
     private static Date parseDate(String inputDate, String pattern, int endOrStart) {
-        if (inputDate.equals("now")) return new Date();
+        if ("now".equals(inputDate)) return new Date();
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);

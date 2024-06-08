@@ -133,9 +133,9 @@ public class APIManagerSettingsApp implements APIMCLIServiceProvider {
         APIQuota systemQuota = adapter.getQuotaAdapter().getDefaultQuota(APIManagerQuotaAdapter.Quota.SYSTEM_DEFAULT);
         APIQuota applicationQuota = adapter.getQuotaAdapter().getDefaultQuota(APIManagerQuotaAdapter.Quota.APPLICATION_DEFAULT);
         QuotaRestriction systemQuotaRestriction = systemQuota.getRestrictions().stream().filter(
-            quotaRestriction -> quotaRestriction.getApi().equals("*")).findFirst().orElse(null);
+            quotaRestriction -> "*".equals(quotaRestriction.getApi())).findFirst().orElse(null);
         QuotaRestriction applicationQuotaRestriction = applicationQuota.getRestrictions().stream().filter(
-            quotaRestriction -> quotaRestriction.getApi().equals("*")).findFirst().orElse(null);
+            quotaRestriction -> "*".equals(quotaRestriction.getApi())).findFirst().orElse(null);
         quotas.setSystemQuota(systemQuotaRestriction);
         quotas.setApplicationQuota(applicationQuotaRestriction);
         return quotas;
@@ -200,7 +200,7 @@ public class APIManagerSettingsApp implements APIMCLIServiceProvider {
             if (systemQuota.getRestrictions() != null) {
                 for (Iterator<QuotaRestriction> iterator = systemQuota.getRestrictions().iterator(); iterator.hasNext(); ) {
                     QuotaRestriction quotaRestriction = iterator.next();
-                    if (quotaRestriction.getApi().equals("*")) {
+                    if ("*".equals(quotaRestriction.getApi())) {
                         iterator.remove();
                         LOG.debug("Removing exiting System Global Quota for update");
                     }
@@ -222,7 +222,7 @@ public class APIManagerSettingsApp implements APIMCLIServiceProvider {
             if (applicationQuota.getRestrictions() != null) {
                 for (Iterator<QuotaRestriction> iterator = applicationQuota.getRestrictions().iterator(); iterator.hasNext(); ) {
                     QuotaRestriction quotaRestriction = iterator.next();
-                    if (quotaRestriction.getApi().equals("*")) {
+                    if ("*".equals(quotaRestriction.getApi())) {
                         iterator.remove();
                         LOG.debug("Removing exiting Application Global Quota for update");
                     }

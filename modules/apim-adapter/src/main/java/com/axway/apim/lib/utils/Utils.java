@@ -238,7 +238,7 @@ public class Utils {
                 if (configuredCustomProperty == null) {
                     throw new AppException("The custom-property: '" + desiredCustomProperty + "' is not configured in API-Manager.", ErrorCode.CANT_READ_CONFIG_FILE);
                 }
-                if (configuredCustomProperty.getType() != null && (configuredCustomProperty.getType().equals("select") || configuredCustomProperty.getType().equals("switch"))) {
+                if (configuredCustomProperty.getType() != null && ("select".equals(configuredCustomProperty.getType()) || "switch".equals(configuredCustomProperty.getType()))) {
                     boolean valueFound = false;
                     List<Option> knownOptions = configuredCustomProperty.getOptions();
                     if (knownOptions == null) {

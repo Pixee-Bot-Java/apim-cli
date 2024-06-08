@@ -355,7 +355,7 @@ public class APIManagerAPIAdapter {
             Iterator<String> keys = profiles.keySet().iterator();
             while (keys.hasNext()) {
                 String key = keys.next();
-                if (key.equals("_default")) continue;
+                if ("_default".equals(key)) continue;
                 APIMethod method = null;
                 for (String apiId : apiIds) {
                     if (mode == METHOD_TRANSLATION.AS_NAME) {
@@ -919,7 +919,7 @@ public class APIManagerAPIAdapter {
                     if (restriction.getApiId().equals(referenceAPI.getId())) { // This application has a restriction for this specific API
                         updateAppQuota = true;
                         restriction.setApiId(apiToUpgradeAccess.getId()); // Take over the quota config to new API
-                        if (!restriction.getMethod().equals("*")) { // The restriction is for a specific method
+                        if (!"*".equals(restriction.getMethod())) { // The restriction is for a specific method
                             String originalMethodName = methodAdapter.getMethodForId(referenceAPI.getId(), restriction.getMethod()).getName();
                             // Try to find the same operation for the newly created API based on the name
                             String newMethodId = methodAdapter.getMethodForName(apiToUpgradeAccess.getId(), originalMethodName).getId();
@@ -1029,7 +1029,7 @@ public class APIManagerAPIAdapter {
      * @throws AppException AppException
      */
     public boolean pollCatalogForPublishedState(String apiId, String apiName, String apiState) throws AppException {
-        if (!apiState.equals("published")) {
+        if (!"published".equals(apiState)) {
             LOG.info("Not checking catalog for API state : {}", apiState);
             return true;
         }
@@ -1063,7 +1063,7 @@ public class APIManagerAPIAdapter {
                 JsonNode jsonNode = mapper.readTree(response);
                 String state = jsonNode.get("state").textValue();
                 LOG.info("Catalog ");
-                if (state.equals("published")) {
+                if ("published".equals(state)) {
                     return true;
                 }
             }

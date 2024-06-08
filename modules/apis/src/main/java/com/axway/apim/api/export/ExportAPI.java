@@ -43,7 +43,7 @@ public class ExportAPI {
             return Collections.emptyMap();
         if (actualAPIProxy.getOutboundProfiles().size() == 1) {
             OutboundProfile defaultProfile = actualAPIProxy.getOutboundProfiles().get(DEFAULT);
-            if (defaultProfile.getRouteType().equals("proxy") && defaultProfile.getAuthenticationProfile().equals(DEFAULT) && defaultProfile.getRequestPolicy() == null && defaultProfile.getResponsePolicy() == null && defaultProfile.getFaultHandlerPolicy() == null)
+            if ("proxy".equals(defaultProfile.getRouteType()) && defaultProfile.getAuthenticationProfile().equals(DEFAULT) && defaultProfile.getRequestPolicy() == null && defaultProfile.getResponsePolicy() == null && defaultProfile.getFaultHandlerPolicy() == null)
                 return Collections.emptyMap();
         }
         for (OutboundProfile profile : actualAPIProxy.getOutboundProfiles().values()) {
@@ -226,7 +226,7 @@ public class ExportAPI {
     }
 
     public String getDescriptionType() {
-        if (actualAPIProxy.getDescriptionType().equals("original")) return null;
+        if ("original".equals(actualAPIProxy.getDescriptionType())) return null;
         return actualAPIProxy.getDescriptionType();
     }
 

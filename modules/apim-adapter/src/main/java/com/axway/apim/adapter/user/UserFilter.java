@@ -48,7 +48,7 @@ public class UserFilter implements CustomPropertiesFilter {
 
     public void setEmail(String email) {
         if (email == null) return;
-        if (email.equals("*")) return;
+        if ("*".equals(email)) return;
         this.email = email;
         String op = "eq";
         if (email.startsWith("*") || email.endsWith("*")) {
@@ -69,14 +69,14 @@ public class UserFilter implements CustomPropertiesFilter {
 
     public void setName(String name) {
         if (name == null) return;
-        if (name.equals("*")) return;
+        if ("*".equals(name)) return;
         this.name = name;
         FilterHelper.setFilter(name, filters);
     }
 
     public void setLoginName(String loginName) {
         if (loginName == null) return;
-        if (loginName.equals("*")) return;
+        if ("*".equals(loginName)) return;
         this.loginName = loginName;
         String op = "eq";
         if (loginName.startsWith("*") || loginName.endsWith("*")) {

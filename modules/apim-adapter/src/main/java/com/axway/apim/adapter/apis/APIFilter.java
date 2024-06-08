@@ -130,7 +130,7 @@ public class APIFilter implements CustomPropertiesFilter {
     public void setName(String name) {
         if (name == null) return;
         // All applications are requested - We ignore this filter
-        if (name.equals("*")) return;
+        if ("*".equals(name)) return;
         this.name = name;
         FilterHelper.setFilter(name, filters);
     }

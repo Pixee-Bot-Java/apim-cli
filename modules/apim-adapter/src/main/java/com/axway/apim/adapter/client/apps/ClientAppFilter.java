@@ -166,7 +166,7 @@ public class ClientAppFilter implements CustomPropertiesFilter {
     public void setApplicationName(String applicationName) {
         if (applicationName == null) return;
         // All applications are requested - We ignore this filter
-        if (applicationName.equals("*")) return;
+        if ("*".equals(applicationName)) return;
         this.applicationName = applicationName;
         FilterHelper.setFilter(applicationName, filters);
     }

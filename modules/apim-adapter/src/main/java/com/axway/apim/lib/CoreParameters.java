@@ -335,7 +335,7 @@ public class CoreParameters implements Parameters {
 
     public void setRetryDelay(String retryDelay) {
         this.retryDelay = 1000;
-        if (retryDelay == null || retryDelay.equals("null")) {
+        if (retryDelay == null || "null".equals(retryDelay)) {
             return;
         }
         try {
@@ -381,7 +381,7 @@ public class CoreParameters implements Parameters {
     protected List<CacheType> createCacheList(String configString) {
         List<CacheType> cachesList = new ArrayList<>();
         for (String cacheName : configString.split(",")) {
-            if (cacheName.equals("ALL")) cacheName = "*";
+            if ("ALL".equals(cacheName)) cacheName = "*";
             cacheName = cacheName.trim();
             if (cacheName.contains("*")) {
                 Pattern pattern = Pattern.compile(cacheName.replace("*", ".*").toLowerCase());

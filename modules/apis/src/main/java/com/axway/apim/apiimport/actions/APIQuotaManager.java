@@ -123,7 +123,7 @@ public class APIQuotaManager {
         for (QuotaRestriction restriction : mergedRestrictions) {
             // Update the API-ID for the API-Restrictions as the API might be re-created.
             restriction.setApiId(createdAPI.getId());
-            if (restriction.getMethod().equals("*")) continue;
+            if ("*".equals(restriction.getMethod())) continue;
             // Additionally, we have to change the methodId
             // Load the method for actualAPI to get the name of the method to which the existing quota is applied to
             if (actualState != null) {

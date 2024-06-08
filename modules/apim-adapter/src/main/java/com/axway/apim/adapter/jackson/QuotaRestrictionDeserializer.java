@@ -74,7 +74,7 @@ public class QuotaRestrictionDeserializer extends JsonDeserializer<QuotaRestrict
         Map<String, String> configMap = new LinkedHashMap<>();
         configMap.put(PERIOD, period);
         configMap.put("per", per);
-        if (type.equals("throttle")) {
+        if ("throttle".equals(type)) {
             configMap.put(MESSAGES, quotaConfig.get(MESSAGES).asText());
         } else {
             configMap.put("mb", quotaConfig.get("mb").asText());

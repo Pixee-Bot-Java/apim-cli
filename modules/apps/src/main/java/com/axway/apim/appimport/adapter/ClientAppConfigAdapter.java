@@ -199,7 +199,7 @@ public class ClientAppConfigAdapter extends ClientAppAdapter {
                     break;
                 }
             }
-            app.getPermissions().removeIf(e -> e.getUsername().equals("ALL"));
+            app.getPermissions().removeIf(e -> "ALL".equals(e.getUsername()));
             // Check individual permissions (e.g. single usernames)
             for (int i = 0; i < app.getPermissions().size(); i++) {
                 ApplicationPermission permission = app.getPermissions().get(i);
