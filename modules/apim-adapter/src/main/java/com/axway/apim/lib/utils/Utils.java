@@ -18,6 +18,8 @@ import com.axway.apim.lib.utils.rest.Console;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
@@ -334,7 +336,7 @@ public class Utils {
     public static String handleOpenAPIServerUrl(String serverUrl, String backendBasePath) throws MalformedURLException {
         String newBackendBasePath;
         if (isHttpUri(serverUrl)) {
-            URL openApiUrl = new URL(serverUrl);
+            URL openApiUrl = Urls.create(serverUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             String path = openApiUrl.getPath();
             if (backendBasePath.endsWith("/")) {
                 newBackendBasePath = backendBasePath.substring(0, backendBasePath.length() - 1) + path;

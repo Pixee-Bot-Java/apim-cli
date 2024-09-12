@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
@@ -150,7 +152,7 @@ public class GenerateTemplate implements APIMCLIServiceProvider {
         String urlString;
 
         if (strURL.startsWith("http")) {
-            URL url = new URL(strURL);
+            URL url = Urls.create(strURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             basePath = url.getPath();
             String protocol = url.getProtocol();
             String host = url.getHost();
@@ -382,7 +384,7 @@ public class GenerateTemplate implements APIMCLIServiceProvider {
     public String writeAPISpecification(String url, String configPath, InputStream inputStream) throws IOException {
         String filename;
         try {
-            filename = new File(new URL(url).getPath()).getName();
+            filename = new File(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).getPath()).getName();
             String content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             File file = new File(configPath);
             String parent = file.getParent();
@@ -404,7 +406,7 @@ public class GenerateTemplate implements APIMCLIServiceProvider {
     }
 
     public String downloadContent(String configPath, String url) throws IOException {
-        URL httpURL = new URL(url);
+        URL httpURL = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         HttpURLConnection httpURLConnection = (HttpURLConnection) httpURL.openConnection();
         int responseCode = httpURLConnection.getResponseCode();
         String filePath = null;
@@ -432,7 +434,7 @@ public class GenerateTemplate implements APIMCLIServiceProvider {
         File file = new File(configPath);
         String parent = file.getParent();
         Base64.Encoder encoder = Base64.getMimeEncoder(64, System.lineSeparator().getBytes());
-        URL httpURL = new URL(url);
+        URL httpURL = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         SSLContext sc = SSLContext.getInstance("TLS");
         sc.init(null, trustAllCerts, new java.security.SecureRandom());
         HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
