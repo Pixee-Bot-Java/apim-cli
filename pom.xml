@@ -67,6 +67,7 @@
         <olingo.odata4.version>4.10.0</olingo.odata4.version>
         <olingo.odata2.version>2.0.13</olingo.odata2.version>
         <jsonpath.version>2.9.0</jsonpath.version>
+        <versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
     </properties>
     <scm>
         <connection>scm:git:https://github.com/Axway-API-Management-Plus/apim-cli.git</connection>
@@ -271,6 +272,11 @@
                 <artifactId>testng</artifactId>
                 <version>7.8.0</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.pixee</groupId>
+                <artifactId>java-security-toolkit</artifactId>
+                <version>${versions.java-security-toolkit}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
