@@ -29,6 +29,8 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import dev.failsafe.Failsafe;
 import dev.failsafe.FailsafeException;
 import dev.failsafe.RetryPolicy;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -299,7 +301,7 @@ public class APIManagerAPIAdapter {
             backendBasePath = api.getServiceProfiles().get("_default").getBasePath();
             if (backendBasePath.contains("${env")) // issue #332
                 return;
-            URL url = new URL(backendBasePath);
+            URL url = Urls.create(backendBasePath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             RemoteHost remoteHost = APIManagerAdapter.getInstance().getRemoteHostsAdapter().getRemoteHost(url.getHost(), url.getPort());
             api.setRemotehost(remoteHost);
         } catch (Exception e) {

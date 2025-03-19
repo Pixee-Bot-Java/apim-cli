@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.*;
 import io.swagger.v3.oas.models.responses.ApiResponse;
@@ -41,7 +43,7 @@ public abstract class ODataSpecification extends APISpecification {
         } else {
             // Otherwise we are using the configured backendBasePath
             try {
-                URL url = new URL(backendBasePath); // Parse it to make sure it is valid
+                URL url = Urls.create(backendBasePath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS); // Parse it to make sure it is valid
                 if (url.getPath() != null && !url.getPath().isEmpty() && !backendBasePath.endsWith("/")) { // See issue #178
                     backendBasePath += "/";
                 }
@@ -76,7 +78,7 @@ public abstract class ODataSpecification extends APISpecification {
 
     private String getBasePath(String pathToMetaData) throws MalformedURLException {
         // Only if the MetaData-Description is given from an HTTP-Endpoint we can use it
-        new URL(pathToMetaData); // Try to parse it, only to see if it's a valid URL
+        Urls.create(pathToMetaData, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS); // Try to parse it, only to see if it's a valid URL
         pathToMetaData = pathToMetaData.substring(0, pathToMetaData.lastIndexOf("/"));
         return pathToMetaData;
     }
