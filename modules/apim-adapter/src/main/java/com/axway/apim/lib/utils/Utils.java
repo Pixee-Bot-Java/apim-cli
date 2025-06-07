@@ -18,6 +18,7 @@ import com.axway.apim.lib.utils.rest.Console;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
@@ -65,7 +66,7 @@ public class Utils {
     public static String getAPIDefinitionUriFromFile(String pathToAPIDefinition) throws AppException {
         String uriToAPIDefinition;
         try (BufferedReader br = new BufferedReader(new FileReader(pathToAPIDefinition))) {
-            uriToAPIDefinition = br.readLine();
+            uriToAPIDefinition = BoundedLineReader.readLine(br, 5_000_000);
             return uriToAPIDefinition;
         } catch (Exception e) {
             throw new AppException("Can't load file:" + pathToAPIDefinition, ErrorCode.CANT_READ_API_DEFINITION_FILE, e);
