@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +52,7 @@ public class Swagger2xSpecification extends APISpecification {
     public void updateBasePath(String basePath, String host) {
         try {
             if (basePath != null) {
-                URL url = new URL(host);
+                URL url = Urls.create(host, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 String port = url.getPort() == -1 ? ":" + url.getDefaultPort() : ":" + url.getPort();
                 if (port.equals(":443") || port.equals(":80")) port = "";
                 ((ObjectNode) swagger).put(BASE_PATH, basePath);
@@ -93,7 +95,7 @@ public class Swagger2xSpecification extends APISpecification {
                 if (backendBasePath.contains("${env")) { // issue #332
                     return;
                 }
-                URL url = new URL(backendBasePath);
+                URL url = Urls.create(backendBasePath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 String port = url.getPort() == -1 ? ":" + url.getDefaultPort() : ":" + url.getPort();
                 if (port.equals(":443") || port.equals(":80")) port = "";
                 if (swagger.get("host") == null) {
